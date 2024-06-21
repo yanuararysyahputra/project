@@ -8,32 +8,33 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <style>
-#data {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+          #data {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
 
-#data td, #data th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+          #data td, #data th {
+            border: 1px solid #ddd;
+            padding: 8px;
+          }
 
-#data tr:nth-child(even){background-color: #f2f2f2;}
+          #data tr:nth-child(even){background-color: #f2f2f2;}
 
-#data tr:hover {background-color: #ddd;}
+          #data tr:hover {background-color: #ddd;}
 
-#data th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #FFD700;
-  color: black;
+          #data th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #FFD700;
+            color: black;
 }
 </style>
 </head>
 <body>
     <h1 class="text-center">DAFTAR TAMU HADIR</h1>
+
                 <table id="data" class="table">
                     <thead>
                       <tr>

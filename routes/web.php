@@ -47,13 +47,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/daftarhadir', [App\Http\Controllers\DaftarHadirController::class, 'index'])->name('daftarhadir');
     Route::get('/scan', [ScanController::class, 'index'])->name('scan');
+    Route::get('/scanmobile', [ScanController::class, 'indexmobile'])->name('scanmobile');
     Route::get('/download', [App\Http\Controllers\DaftarHadirController::class, 'download'])->name('download');
     Route::get('/datapengantin', [DataPengantinController::class, 'index'])->name('datapengantin');
     Route::get('/lihatdata', [DataPengantinController::class, 'lihatdata'])->name('lihatdata');
     Route::get('/daftarundangan', [DaftarUndanganController::class, 'index'])->name('daftarundangan');
     Route::get('/penyewa', [PenyewaController::class, 'index'])->name('penyewa');
     Route::get('/penyewa/delete/{uid}', [PenyewaController::class, 'delete'])->name('penyewaDelete');
-    Route::get('/datapengantin/hapusdata/{uid}', [DataPengantinController::class, 'hapusdata'])->name('datapengantinhapusdata');
+    Route::get('/datapengantin/delete/{uid}', [DataPengantinController::class, 'hapusdata'])->name('datapengantinDelete');
 
     Route::post('/store', [DataPengantinController::class, 'store'])->name('store');
     Route::post('/storeUser', [PenyewaController::class, 'storeUser'])->name('storeUser');

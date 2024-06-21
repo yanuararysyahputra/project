@@ -50,7 +50,7 @@ class DataPengantinController extends Controller
 
     }
 
-    public function hapusdata($uid){
+    public function delete($uid){
         $data = Pengantin::where('uuid',$uid)->first();
         $data->delete();
         return redirect()->back()->with('success','Data Berhasil diHapus!');

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
+    <title>Scan Qr </title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -80,7 +80,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link">
-                        <i class="fas fa-user"> {{ auth()->user()->name }}</i>
+                        <i class="fas fa-user"> {{auth()->user()->name}}</i>
 
                     </a>
                 </li>
@@ -92,12 +92,13 @@
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
-                <img src="{{ asset('baackend/dist/img/Marrene.png') }}" alt="AdminLTE Logo"
+            <img src="{{ asset('baackend/dist/img/Marrene.png') }}" alt="AdminLTE Logo"
                 height="80" width="220">
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
+
 
                 <!-- SidebarSearch Form -->
                 <div class="form-inline mt-2">
@@ -112,14 +113,14 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Menu -->
+            <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                        <li class="nav-header">MASTER</li>
+               <li class="nav-header">MASTER</li>
                         <li class="nav-item">
                             <a href="{{ route('datapengantin') }}" class="nav-link">
                                 <i class="nav-icon fas fa-database"></i>
@@ -192,59 +193,26 @@
             <!-- /.sidebar -->
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
+        <!-- Scanner Frame -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h4 class="pt-2 ">Hi, {{ auth()->user()->name }}</h4>
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
-                </div>
-                <!-- /.content-header -->
-
-                <!-- Main content -->
                 <section class="content">
-                    <div class="container-fluid">
-                        <!-- Small boxes (Stat box) -->
-                        <div class="row">
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-info">
-                                    <div class="inner">
-                                        <h3>{{ $totaltamu }}</h3>
-                                        <h3></h3>
-
-                                        <p>Total Tamu</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <a href="{{ route('daftarhadir') }}" class="small-box-footer">Lihat Detail <i
-                                            class="fas fa-arrow-circle-right"></i></a>
-                                </div>
+                    <div class="container-fluid">                        
+                    @include('sweetalert::alert')
+                        <div class="row pt-2">
+                        <div class="col-md-5 mx-auto">
+                            <h5 class=" text-center">Scan QR Disini</h5>
+                            <div id="reader" width="400px"></div>
                             </div>
-                            <div class="col-lg-3 col-6">
-                                <!-- small box -->
-                                <div class="small-box bg-success">
-                                    <div class="inner">
-                                        <h3>{{ $totalundangan }}</h3>
-                                        <h3></h3>
-
-                                        <p>Total Undangan</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <a href="{{ route('daftarundangan') }}" class="small-box-footer">Lihat Detail <i
-                                            class="fas fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="text-center mt-2">
+                            <div id="result"></div>
+                            <a href="" id="input" class="btn btn-outline-success">Submit</a>
+                            {{-- <form action="{{ url('add-tamu') }}" method="post">
+                                <input type="hidden" id="input">
+                                <button type="submit" class="btn btn-outline-success" >Submit</button>
+                            </form> --}}
+                        </div>
                             <!-- ./col -->
-
-
                             <!-- Control Sidebar -->
                             <aside class="control-sidebar control-sidebar-dark">
                                 <!-- Control sidebar content goes here -->
@@ -253,8 +221,86 @@
                         </div>
                         <!-- ./wrapper -->
 
-                        <!-- jQuery -->
-                        <script src="{{ asset('baackend/plugins/jquery/jquery.min.js') }}"></script>
+                        <table style="width:75%;" class="table table-striped border mt-4 display" align=center>
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Kehadiran</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($data as $no => $item)
+                      <tr>
+                        <td>{{$no+1}}</td>
+                        <td>{{$item['nama']}}</td>
+                        <td>{{$item['alamat']}}</td>
+                        <td>{{$item['created_at']}}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                </table>
+                <div class="justify-content-center" align=center>
+                {{$data->links()}}
+                </div>
+</body>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+        <script>
+            function onScanSuccess(decodedText, decodedResult) {
+                // handle the scanned code as you like, for example:
+                console.log(`Code matched = ${decodedText}`, decodedResult);
+                document.getElementById('result').innerText = decodedText;
+                document.getElementById('input').href = decodedText;
+            }
+
+            function onScanFailure(error) {
+                // handle scan failure, usually better to ignore and keep scanning.
+                // for example:
+                console.warn(`Code scan error = ${error}`);
+            }
+
+            let html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", {
+                    fps: 10,
+                    qrbox: {
+                        width: 250,
+                        height: 250
+                    }
+                },
+                /* verbose= */
+                false);
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        </script>
+
+        {{-- <script>
+            function onScanSuccess(decodedText, decodedResult) {
+                // handle the scanned code as you like, for example:
+                console.log(`Code matched = ${decodedText}`, decodedResult);
+            }
+
+            function onScanFailure(error) {
+                // handle scan failure, usually better to ignore and keep scanning.
+                // for example:
+                //console.warn(`Code scan error = ${error}`);
+            }
+
+            let html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", {
+                    fps: 10,
+                    qrbox: {
+                        width: 250,
+                        height: 250
+                    }
+                },
+                /* verbose= */
+                false);
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        </script> --}}
+
+<!-- jQuery -->
+<script src="{{ asset('baackend/plugins/jquery/jquery.min.js') }}"></script>
                         <!-- jQuery UI 1.11.4 -->
                         <script src="{{ asset('baackend/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
                         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -286,7 +332,5 @@
                         <!-- AdminLTE for demo purposes -->
                         <script src="{{ asset('baackend/dist/js/demo.js') }}"></script>
                         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-                        <script src="{{ asset('baackend/dist/js/pages/dashboard.js') }}"></script>
-</body>
-
+                        <script src="{{ asset('baackend/dist/js/pages/dashboard.js') }}"></script>        
 </html>

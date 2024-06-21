@@ -112,21 +112,21 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           
-        <li class="nav-header">MASTER</li>
-        <li class="nav-item">
-                            <a href="{{ route('home')}}" class="nav-link">
-                            <i class="nav-icon fas fa-house-user"></i>
-                            <p>
-                                Beranda
-                                <span class="badge badge-info right"></span>
-                            </p>
+               <li class="nav-header">MASTER</li>
+                        <li class="nav-item">
+                            <a href="{{ route('datapengantin') }}" class="nav-link">
+                                <i class="nav-icon fas fa-database"></i>
+                                <p>
+                                    Input Data Pengantin
+                                    <span class="badge badge-info right"></span>
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('lihatdata') }}" class="nav-link">
-                                <i class="nav-icon fas fa-database"></i>
+                            <a href="{{ route('daftarundangan') }}" class="nav-link">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
-                                    Lihat Data Pengantin
+                                    Daftar Undangan
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>
@@ -136,6 +136,15 @@
                                 <i class="nav-icon fas fa-qrcode"></i>
                                 <p>
                                     Scan QR Code
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('scanmobile') }}" class="nav-link">
+                                <i class="nav-icon fas fa-qrcode"></i>
+                                <p>
+                                    Scan Via Mobile
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>

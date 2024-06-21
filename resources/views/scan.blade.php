@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('baackend/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('baackend/plugins/summernote/summernote-bs4.min.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -120,21 +121,12 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                    <li class="nav-header">MASTER</li>
-                    <li class="nav-item">
-                            <a href="{{ route('home')}}" class="nav-link">
-                            <i class="nav-icon fas fa-house-user"></i>
-                            <p>
-                                Beranda
-                                <span class="badge badge-info right"></span>
-                            </p>
-                            </a>
-                        </li>
+               <li class="nav-header">MASTER</li>
                         <li class="nav-item">
-                            <a href="{{ route('lihatdata') }}" class="nav-link">
+                            <a href="{{ route('datapengantin') }}" class="nav-link">
                                 <i class="nav-icon fas fa-database"></i>
                                 <p>
-                                    Lihat Data Pengantin
+                                    Input Data Pengantin
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>
@@ -144,6 +136,24 @@
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
                                     Daftar Undangan
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('scan') }}" class="nav-link">
+                                <i class="nav-icon fas fa-qrcode"></i>
+                                <p>
+                                    Scan QR Code
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('scanmobile') }}" class="nav-link">
+                                <i class="nav-icon fas fa-qrcode"></i>
+                                <p>
+                                    Scan Via Mobile
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>
@@ -192,16 +202,15 @@
                         <div class="row pt-2">
                         <div class="col-md-5 mx-auto">
                             <h5 class=" text-center">Scan QR Disini</h5>
-                            <div id="reader" width="400px"></div>
                             </div>
                         </div>
                         <div class="text-center mt-2">
-                            <div id="result"></div>
-                            <a href="" id="input" class="btn btn-outline-success">Submit</a>
-                            {{-- <form action="{{ url('add-tamu') }}" method="post">
-                                <input type="hidden" id="input">
-                                <button type="submit" class="btn btn-outline-success" >Submit</button>
-                            </form> --}}
+                            <form id="dynamic-form" method="get">
+                                <div class="justify-content-center" align=center>
+                                    <input style="width:50%" class="form-control center" type="text" id="action-url" placeholder="Data Tamu">
+                                </div>
+                                <button type="submit" class="btn btn-outline-success mt-4">Submit</button>
+                            </form>
                         </div>
                             <!-- ./col -->
                             <!-- Control Sidebar -->
@@ -211,7 +220,44 @@
                             <!-- /.control-sidebar -->
                         </div>
                         <!-- ./wrapper -->
+                
+                <table style="width:75%;" class="table table-striped border mt-4 display" align=center>
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Kehadiran</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($data as $no => $item)
+                      <tr>
+                        <td>{{$no+1}}</td>
+                        <td>{{$item['nama']}}</td>
+                        <td>{{$item['alamat']}}</td>
+                        <td>{{$item['created_at']}}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                </table>
+                <div class="justify-content-center" align=center>
+                {{$data->links()}}
+                </div>
 </body>
+    <script>
+        document.getElementById('dynamic-form').addEventListener('submit', function(event){
+            event.preventDefault();//
+            var inputValue = document.getElementById('action-url').value;
+            if(inputValue){
+                this.action = inputValue;
+                this.submit();
+            }else{
+                alert('Masukan Nama Tamu Yang Terdaftar');
+            }
+        });
+    </script>
+
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
         <script>

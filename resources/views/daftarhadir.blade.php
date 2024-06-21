@@ -114,20 +114,11 @@
                with font-awesome or any other icon font library -->
           
                <li class="nav-header">MASTER</li>
-               <li class="nav-item">
-                            <a href="{{ route('home')}}" class="nav-link">
-                            <i class="nav-icon fas fa-house-user"></i>
-                            <p>
-                                Beranda
-                                <span class="badge badge-info right"></span>
-                            </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
-                            <a href="{{ route('lihatdata') }}" class="nav-link">
+                            <a href="{{ route('datapengantin') }}" class="nav-link">
                                 <i class="nav-icon fas fa-database"></i>
                                 <p>
-                                    Lihat Data Pengantin
+                                    Input Data Pengantin
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>
@@ -150,7 +141,24 @@
                                 </p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{ route('scanmobile') }}" class="nav-link">
+                                <i class="nav-icon fas fa-qrcode"></i>
+                                <p>
+                                    Scan Via Mobile
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('daftarhadir') }}" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Daftar Hadir Tamu
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item" style="display: {{ Auth::user()->role == 'Admin'?'': 'none' }}">
                             <a href="{{ route('penyewa') }}" class="nav-link">
                                 <i class="nav-icon far fa-user"></i>
