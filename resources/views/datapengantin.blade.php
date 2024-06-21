@@ -4,6 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('baackend/dist/img/AdminLTELogoSide.png') }}" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
     <title>Data Pengantin</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Google Font: Source Sans Pro -->

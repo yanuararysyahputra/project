@@ -4,6 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('baackend/dist/img/AdminLTELogoSide.png') }}" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
     <title>Dashboard</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Google Font: Source Sans Pro -->
@@ -120,7 +124,7 @@
                with font-awesome or any other icon font library -->
 
                         <li class="nav-header">MASTER</li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: {{ Auth::user()->role == 'Client'?'': 'none' }}">
                             <a href="{{ route('datapengantin') }}" class="nav-link">
                                 <i class="nav-icon fas fa-database"></i>
                                 <p>
@@ -129,7 +133,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: {{ Auth::user()->role == 'Client'?'': 'none' }}">
                             <a href="{{ route('daftarundangan') }}" class="nav-link">
                                 <i class="nav-icon fas fa-clipboard-list"></i>
                                 <p>
@@ -138,7 +142,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: {{ Auth::user()->role == 'Client'?'': 'none' }}">
                             <a href="{{ route('scan') }}" class="nav-link">
                                 <i class="nav-icon fas fa-qrcode"></i>
                                 <p>
@@ -147,7 +151,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: {{ Auth::user()->role == 'Client'?'': 'none' }}">
                             <a href="{{ route('scanmobile') }}" class="nav-link">
                                 <i class="nav-icon fas fa-qrcode"></i>
                                 <p>
@@ -156,7 +160,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: {{ Auth::user()->role == 'Client'?'': 'none' }}">
                             <a href="{{ route('daftarhadir') }}" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
@@ -169,7 +173,7 @@
                             <a href="{{ route('penyewa') }}" class="nav-link">
                                 <i class="nav-icon far fa-user"></i>
                                 <p>
-                                    Penyewa
+                                    Client
                                 </p>
                             </a>
                         </li>

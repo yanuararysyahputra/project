@@ -12,7 +12,7 @@ class PenyewaController extends Controller
 {
     public function index(){
         if(Auth::user()->role === 'Admin'){
-            $user = User::where('role', 'Penyewa')->get();
+            $user = User::where('role', 'Client')->get();
             // dd($user);
             return view('Admin.Penyewa',['user'=>$user]);
         }else{
@@ -27,7 +27,7 @@ class PenyewaController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'role'=> 'Penyewa'
+            'role'=> 'Client'
         ]);
         return redirect()->back()->with('success','User Berhasil Di Buat !');
 
