@@ -122,6 +122,15 @@
                with font-awesome or any other icon font library -->
 
                <li class="nav-header">MASTER</li>
+               <li class="nav-item">
+                            <a href="{{ route('home')}}" class="nav-link">
+                            <i class="nav-icon fas fa-house-user"></i>
+                            <p>
+                                Beranda
+                                <span class="badge badge-info right"></span>
+                            </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('datapengantin') }}" class="nav-link">
                                 <i class="nav-icon fas fa-database"></i>
@@ -228,6 +237,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Kehadiran</th>
+                        <th scope="col">Jam</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -236,7 +246,8 @@
                         <td>{{$no+1}}</td>
                         <td>{{$item['nama']}}</td>
                         <td>{{$item['alamat']}}</td>
-                        <td>{{$item['created_at']}}</td>
+                        <td>{{$item->created_at->format('d-M-Y')}}</td>
+                        <td>{{$item->created_at->format('h:i A')}}</td>
                       </tr>
                       @endforeach
                     </tbody>

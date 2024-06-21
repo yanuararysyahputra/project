@@ -42,6 +42,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Kehadiran</th>
+                        <th scope="col">Jam</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -50,7 +51,8 @@
                         <td>{{$no+1}}</td>
                         <td>{{$item['nama']}}</td>
                         <td>{{$item['alamat']}}</td>
-                        <td>{{$item['created_at']}}</td>
+                        <td>{{$item->created_at->format('d-M-Y')}}</td>
+                        <td>{{$item->created_at->format('h:i A')}}</td>
                       </tr>
                       @endforeach
                     </tbody>
